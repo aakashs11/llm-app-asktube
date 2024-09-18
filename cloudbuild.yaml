@@ -15,7 +15,7 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'asktube'  # Replace with your Cloud Run service name if needed
+      - 'streamlit-app'  # Replace with your Cloud Run service name if needed
       - '--image'
       - 'gcr.io/$PROJECT_ID/streamlit-app:$COMMIT_SHA'
       - '--region'
