@@ -1,24 +1,23 @@
 options:
-  logging: CLOUD_LOGGING_ONLY  # Use this if you don't want a bucket (see Option 2)
-  logsBucket: gs://personal-projects-v1-build-logs
-  
+  logging: CLOUD_LOGGING_ONLY 
+
 steps:
   # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/youtube-qa-app:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/asktube:$COMMIT_SHA', '.']
 
   # Step 2: Push the image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/youtube-qa-app:$COMMIT_SHA']
+    args: ['push', 'gcr.io/$PROJECT_ID/asktube:$COMMIT_SHA']
 
   # Step 3: Deploy to Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'run'
       - 'deploy'
-      - 'youtube-qa-app'  # Replace with your Cloud Run service name if needed
+      - 'asktube'  # Replace with your Cloud Run service name if needed
       - '--image'
-      - 'gcr.io/$PROJECT_ID/youtube-qa-app:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/asktube:$COMMIT_SHA'
       - '--region'
       - 'us-central1'  # Replace with your region
       - '--platform'
@@ -31,4 +30,4 @@ substitutions:
   _COMMIT_SHA: '${SHORT_SHA}'  # Mapping SHORT_SHA to COMMIT_SHA for consistency
 
 images:
-  - 'gcr.io/$PROJECT_ID/youtube-qa-app:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/asktube:$COMMIT_SHA'
