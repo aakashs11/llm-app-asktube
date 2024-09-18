@@ -1,3 +1,7 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # Use this if you don't want a bucket (see Option 2)
+  logsBucket: gs://personal-projects-v1-build-logs
+  
 steps:
   # Step 1: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
