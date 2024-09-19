@@ -91,10 +91,8 @@ if "processing" not in st.session_state:
 st.markdown('<div class="fixed-header">', unsafe_allow_html=True)
 st.title("AskTube: Your YouTube Video Assistant 🎥🤖")
 st.markdown('</div>', unsafe_allow_html=True)
-
 if not st.session_state.video_processed:
-    video_url = st.text_input("", placeholder="Paste your YouTube video URL here")
-    
+    video_url = st.text_input("YouTube Video URL", placeholder="Paste your YouTube video URL here", label_visibility="collapsed")
     if st.button("Process Video", type="primary"):
         if video_url:
             with st.spinner("Processing video... This may take a moment."):
@@ -136,7 +134,7 @@ else:
     
     # Chat input
     st.markdown('<div class="input-container">', unsafe_allow_html=True)
-    st.text_input("", placeholder="Type your question here", key="query_input", on_change=send_message)
+    st.text_input("Chat Input", placeholder="Type your question here", key="query_input", on_change=send_message, label_visibility="collapsed")
     st.button("Send", type="primary", on_click=send_message)
     st.markdown('</div>', unsafe_allow_html=True)
     
